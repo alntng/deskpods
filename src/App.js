@@ -1,24 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import { SpotifyAuth, Scopes } from "react-spotify-auth";
+import "react-spotify-auth/dist/index.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SpotifyAuth
+      redirectUri="http://localhost.com:8888/callback/"
+      clientID="1d54f201e7a04ba689f81a469340ea22"
+      scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]}
+    />
   );
 }
 
