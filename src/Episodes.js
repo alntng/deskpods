@@ -6,7 +6,7 @@ export default function Episodes(props) {
   const [subscribedPods, setSubscribedPods] = useState([]);
 
   const getSubscriptions = async () => {
-    const pods = await axios.get(
+    const res = await axios.get(
       "https://api.spotify.com/v1/me/shows?limit=50",
       {
         headers: {
@@ -17,7 +17,20 @@ export default function Episodes(props) {
       }
     );
 
-    console.log(pods.data.items);
+    const podList = [];
+    res.data.items.forEach((pod) => {
+      let { name, id, uri, external_urls } = pod.show;
+      //   console.log(pod);
+
+      podList.push({
+        name,
+        id,
+        uri,
+        external_urls,
+      });
+    });
+
+    console.log(podList);
   };
 
   getSubscriptions();
