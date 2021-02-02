@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 const axios = require("axios");
 
 export default function Episodes(props) {
@@ -75,13 +75,19 @@ export default function Episodes(props) {
     console.log(flatList);
   };
 
-  getSubscriptions();
+  useEffect(getSubscriptions, []);
+  //   getSubscriptions();
 
   return (
     <div>
       <h1> Latest Podcast Episdoes</h1>
       {subscribedPods.map((pod) => {
-        return <p>{pod.name}</p>;
+        return (
+          <div>
+            <p>{pod.name}</p>
+            <img src={pod.images[2].url} />
+          </div>
+        );
       })}
     </div>
   );
