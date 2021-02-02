@@ -28,6 +28,7 @@ function App() {
             Scopes.userReadPrivate,
             Scopes.userReadEmail,
             Scopes.userLibraryRead,
+            Scopes.userReadPlaybackPosition,
           ]}
         />
       )}
