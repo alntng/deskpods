@@ -7,19 +7,24 @@ import Cookies from "js-cookie";
 import Episodes from "./Episodes";
 
 function App() {
+  // const [global, setGlobal] = useState({})
   const token = Cookies.get("spotifyAuthToken");
-
+  const domWindow = window;
+  console.log("Spotify Auth", token);
+  console.log("window Object", domWindow);
+  console.log("Spotify in the window??", domWindow.Spotify);
   return (
     <div className="app">
       {token ? (
-        <SpotifyApiContext.Provider value={token}>
+        <div>
           <SpotifyPlayer
             token={token}
-            uris={["spotify:artist:7A0awCXkE1FtSU8B0qwOJQ"]}
+            uris={["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]}
           />
-
-          <Episodes token={token} />
-        </SpotifyApiContext.Provider>
+          <SpotifyApiContext.Provider value={token}>
+            <Episodes token={token} />
+          </SpotifyApiContext.Provider>
+        </div>
       ) : (
         // Display the login page
         <SpotifyAuth
