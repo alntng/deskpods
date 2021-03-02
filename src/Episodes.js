@@ -3,8 +3,26 @@ const axios = require("axios");
 
 export default function Episodes(props) {
   const token = props.token;
+  console.log(token);
   const [subscribedPods, setSubscribedPods] = useState([]);
+  const [userId, setUserId] = useState("");
 
+  //grab userId
+  const userHeader = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  const grabUser = async () => {
+    const foundUser = await axios.get(
+      "https://api.spotify.com/v1/me",
+      userHeader
+    );
+    // console.log("SPOTIFY USER", foundUser.data.id);
+
+    return foundUser.data;
+  };
+
+  //grab users'podcasts
   const axiosHeader = {
     headers: {
       Accept: "application/json",
@@ -21,12 +39,23 @@ export default function Episodes(props) {
       axiosHeader
     );
 
-    // console.log("episode list", res);
-    // res.data.items.forEach((episode) => {
-    //   episodes.push(episode);
-    // });
-
     return res.data.items;
+  };
+
+  const createPlaylist = async () => {
+    const metaData = {
+      name: "New Pods",
+      description: "Latest Podcasts",
+      public: false,
+    };
+
+    const newPlaylist = await axios.post(
+      `https://api.spotify.com/v1/users/${userId}/playlists`,
+      metaData,
+      axiosHeader
+    );
+
+    console.log("new playlist created!");
   };
 
   const getSubscriptions = async () => {
@@ -72,15 +101,23 @@ export default function Episodes(props) {
     );
 
     setSubscribedPods(flatList);
+
+    const currUser = await grabUser();
+    setUserId(currUser.id);
+
+    createPlaylist();
+    // console.log(userId);
     console.log(flatList);
   };
 
   useEffect(getSubscriptions, []);
-  //   getSubscriptions();
+
+  console.log(userId, subscribedPods.length);
 
   return (
     <div>
       <h1> Latest Podcast Episdoes</h1>
+      <h5>{userId}</h5>
       {subscribedPods.map((pod) => {
         return (
           <div>
