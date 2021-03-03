@@ -42,7 +42,7 @@ export default function Episodes(props) {
     return res.data.items;
   };
 
-  const createPlaylist = async () => {
+  const createPlaylist = async (user_id) => {
     const metaData = {
       name: "New Pods",
       description: "Latest Podcasts",
@@ -50,12 +50,26 @@ export default function Episodes(props) {
     };
 
     const newPlaylist = await axios.post(
-      `https://api.spotify.com/v1/users/${userId}/playlists`,
+      `https://api.spotify.com/v1/users/${user_id}/playlists`,
       metaData,
       axiosHeader
     );
 
-    console.log("new playlist created!");
+    console.log(newPlaylist);
+    return newPlaylist.data;
+  };
+
+  const addToPlaylist = async (playlist_id) => {
+    const episodesAdded = {
+      uris: "spotify%3Aepisode%3A4cPEJLaOuG7de0Ei860yZj",
+    };
+    await axios.post(
+      `https://api.spotify.com/v1/playlists/${playlist_id}/tracks?uris=spotify%3Aepisode%3A4cPEJLaOuG7de0Ei860yZj`,
+      {},
+      axiosHeader
+    );
+
+    console.log("added new episodes to playlist");
   };
 
   const getSubscriptions = async () => {
@@ -95,7 +109,6 @@ export default function Episodes(props) {
         flatList.push(episode);
       });
     });
-
     flatList.sort(
       (a, b) => Date.parse(b.release_date) - Date.parse(a.release_date)
     );
@@ -105,8 +118,10 @@ export default function Episodes(props) {
     const currUser = await grabUser();
     setUserId(currUser.id);
 
-    createPlaylist();
-    // console.log(userId);
+    const newPlaylist = await createPlaylist(currUser.id);
+
+    addToPlaylist(newPlaylist.id);
+    console.log(newPlaylist.id);
     console.log(flatList);
   };
 
