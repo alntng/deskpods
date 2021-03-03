@@ -59,12 +59,25 @@ export default function Episodes(props) {
     return newPlaylist.data;
   };
 
-  const addToPlaylist = async (playlist_id) => {
-    const episodesAdded = {
-      uris: "spotify%3Aepisode%3A4cPEJLaOuG7de0Ei860yZj",
+  const addToPlaylist = async (playlist_id, episodes) => {
+    const convertURI = (uri) => {
+      return uri.split(":").join("%3A");
     };
+
+    let episodesAdded = [];
+    for (let i = 0; i < 50; i++) {
+      const currEp = convertURI(episodes[i].uri);
+
+      episodesAdded.push(currEp);
+    }
+    episodesAdded = episodesAdded.join("%2C");
+    console.log("new podcasts", episodesAdded);
+    // const episodesAdded =
+    // "spotify%3Aepisode%3A2mX8U0yF2BVYdKU6fjF5Wy%2Cspotify%3Aepisode%3A2ldbc9aVblsqWBxUF8lqSe";
+    // 'spotify%3episode%33YOPIsObE0s4Sg76TeJ9bR%2Cspotify%3episode%32W8xmWRGqSDvrXqfxKbRBl'
+
     await axios.post(
-      `https://api.spotify.com/v1/playlists/${playlist_id}/tracks?uris=spotify%3Aepisode%3A4cPEJLaOuG7de0Ei860yZj`,
+      `https://api.spotify.com/v1/playlists/${playlist_id}/tracks?uris=${episodesAdded}`,
       {},
       axiosHeader
     );
@@ -120,7 +133,7 @@ export default function Episodes(props) {
 
     const newPlaylist = await createPlaylist(currUser.id);
 
-    addToPlaylist(newPlaylist.id);
+    addToPlaylist(newPlaylist.id, flatList);
     console.log(newPlaylist.id);
     console.log(flatList);
   };
