@@ -65,7 +65,7 @@ export default function Episodes(props) {
     };
 
     let episodesAdded = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
       const currEp = convertURI(episodes[i].uri);
 
       episodesAdded.push(currEp);
