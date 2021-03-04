@@ -1,10 +1,12 @@
+// import { grabLatest } from "./utils";
 import React, { useState, useEffect } from "react";
 const axios = require("axios");
 
 export default function Episodes(props) {
-  const token = props.token;
+  const { subscribedPods, setSubscribedPods, token } = props;
+
   console.log(token);
-  const [subscribedPods, setSubscribedPods] = useState([]);
+
   const [userId, setUserId] = useState("");
 
   //grab userId
@@ -17,8 +19,6 @@ export default function Episodes(props) {
       "https://api.spotify.com/v1/me",
       userHeader
     );
-    // console.log("SPOTIFY USER", foundUser.data.id);
-
     return foundUser.data;
   };
 
@@ -65,16 +65,13 @@ export default function Episodes(props) {
     };
 
     let episodesAdded = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 50; i++) {
       const currEp = convertURI(episodes[i].uri);
 
       episodesAdded.push(currEp);
     }
     episodesAdded = episodesAdded.join("%2C");
     console.log("new podcasts", episodesAdded);
-    // const episodesAdded =
-    // "spotify%3Aepisode%3A2mX8U0yF2BVYdKU6fjF5Wy%2Cspotify%3Aepisode%3A2ldbc9aVblsqWBxUF8lqSe";
-    // 'spotify%3episode%33YOPIsObE0s4Sg76TeJ9bR%2Cspotify%3episode%32W8xmWRGqSDvrXqfxKbRBl'
 
     await axios.post(
       `https://api.spotify.com/v1/playlists/${playlist_id}/tracks?uris=${episodesAdded}`,
@@ -91,26 +88,18 @@ export default function Episodes(props) {
       axiosHeader
     );
 
-    const podList = [];
-    const episodes = [];
+    const subscriptions = [];
 
     res.data.items.forEach(async (pod) => {
-      let { name, id, uri, external_urls } = pod.show;
-
-      podList.push({
-        name,
-        id,
-        uri,
-        external_urls,
-      });
+      subscriptions.push(pod.show);
     });
 
-    console.log(podList);
+    console.log("users subscriptions", subscriptions);
 
     let allEpisodes = [];
 
-    for (const pod of podList) {
-      let currList = grabLatest(pod);
+    for (const pod of subscriptions) {
+      let currList = grabLatest(pod, axiosHeader);
       allEpisodes = [...allEpisodes, grabLatest(pod)];
     }
 
@@ -131,11 +120,10 @@ export default function Episodes(props) {
     const currUser = await grabUser();
     setUserId(currUser.id);
 
-    const newPlaylist = await createPlaylist(currUser.id);
-
-    addToPlaylist(newPlaylist.id, flatList);
-    console.log(newPlaylist.id);
-    console.log(flatList);
+    // const newPlaylist = await createPlaylist(currUser.id);
+    // addToPlaylist(newPlaylist.id, flatList);
+    // console.log(newPlaylist.id);
+    // console.log(flatList);
   };
 
   useEffect(getSubscriptions, []);
