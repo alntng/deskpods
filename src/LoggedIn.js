@@ -30,7 +30,7 @@ export default function LoggedIn({ token }) {
           <h1>MODAL</h1>
         </EpisodeModal>
         <h1>Any shows you want to exlude from your most recent?</h1>
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap justify-center">
           {subscribedPods.map((show) => {
             return <ShowCard name={show.name} thumbnail={show.images[2]} />;
           })}
