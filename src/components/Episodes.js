@@ -7,20 +7,20 @@ export default function Episodes(props) {
 
   console.log(token);
 
-  const [userId, setUserId] = useState("");
+  // const [userId, setUserId] = useState("");
 
   //grab userId
   const userHeader = {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const grabUser = async () => {
-    const foundUser = await axios.get(
-      "https://api.spotify.com/v1/me",
-      userHeader
-    );
-    return foundUser.data;
-  };
+  // const grabUser = async () => {
+  //   const foundUser = await axios.get(
+  //     "https://api.spotify.com/v1/me",
+  //     userHeader
+  //   );
+  //   return foundUser.data;
+  // };
 
   //grab users'podcasts
   const axiosHeader = {
@@ -82,23 +82,23 @@ export default function Episodes(props) {
     console.log("added new episodes to playlist");
   };
 
-  const getSubscriptions = async () => {
-    const res = await axios.get(
-      "https://api.spotify.com/v1/me/shows?limit=50",
-      axiosHeader
-    );
+  // const getSubscriptions = async () => {
+  //   const res = await axios.get(
+  //     "https://api.spotify.com/v1/me/shows?limit=50",
+  //     axiosHeader
+  //   );
 
-    const subscriptions = [];
+  //   const subscriptions = [];
 
-    res.data.items.forEach(async (pod) => {
-      subscriptions.push(pod.show);
-    });
+  //   res.data.items.forEach(async (pod) => {
+  //     subscriptions.push(pod.show);
+  //   });
 
-    console.log("users subscriptions", subscriptions);
-    const currUser = await grabUser();
-    setUserId(currUser.id);
-    setSubscribedPods(subscriptions);
-  };
+  //   console.log("users subscriptions", subscriptions);
+  //   const currUser = await grabUser();
+  //   setUserId(currUser.id);
+  //   setSubscribedPods(subscriptions);
+  // };
 
   // let allEpisodes = [];
 
@@ -124,14 +124,14 @@ export default function Episodes(props) {
   // console.log(newPlaylist.id);
   // console.log(flatList);
 
-  useEffect(getSubscriptions, []);
+  // useEffect(getSubscriptions, []);
 
-  console.log(userId, subscribedPods.length);
+  // console.log(userId, subscribedPods.length);
 
   return (
     <div>
       <h1> Latest Podcast Episdoes</h1>
-      <h5>{userId}</h5>
+
       {/* {subscribedPods.map((pod) => {
         return (
           <div>
