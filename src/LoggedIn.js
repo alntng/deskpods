@@ -30,10 +30,11 @@ export default function LoggedIn({ token }) {
           <h1>MODAL</h1>
         </EpisodeModal>
         <h1>Any shows you want to exlude from your most recent?</h1>
-        {subscribedPods.map((show) => {
-          console.log(show.name, show.images[2]);
-          return <ShowCard name={show.name} thumbnail={show.images[2]} />;
-        })}
+        <div class="flex flex-wrap">
+          {subscribedPods.map((show) => {
+            return <ShowCard name={show.name} thumbnail={show.images[2]} />;
+          })}
+        </div>
         <Episodes
           subscribedPods={subscribedPods}
           setSubscribedPods={setSubscribedPods}
