@@ -95,36 +95,34 @@ export default function Episodes(props) {
     });
 
     console.log("users subscriptions", subscriptions);
-
-    let allEpisodes = [];
-
-    for (const pod of subscriptions) {
-      let currList = grabLatest(pod, axiosHeader);
-      allEpisodes = [...allEpisodes, grabLatest(pod)];
-    }
-
-    allEpisodes = await Promise.all(allEpisodes);
-
-    let flatList = [];
-    allEpisodes.forEach((list) => {
-      list.forEach((episode) => {
-        flatList.push(episode);
-      });
-    });
-    flatList.sort(
-      (a, b) => Date.parse(b.release_date) - Date.parse(a.release_date)
-    );
-
-    setSubscribedPods(flatList);
-
     const currUser = await grabUser();
     setUserId(currUser.id);
-
-    // const newPlaylist = await createPlaylist(currUser.id);
-    // addToPlaylist(newPlaylist.id, flatList);
-    // console.log(newPlaylist.id);
-    // console.log(flatList);
+    setSubscribedPods(subscriptions);
   };
+
+  // let allEpisodes = [];
+
+  // for (const pod of subscriptions) {
+  //   let currList = grabLatest(pod, axiosHeader);
+  //   allEpisodes = [...allEpisodes, grabLatest(pod)];
+  // }
+
+  // allEpisodes = await Promise.all(allEpisodes);
+
+  // let flatList = [];
+  // allEpisodes.forEach((list) => {
+  //   list.forEach((episode) => {
+  //     flatList.push(episode);
+  //   });
+  // });
+  // flatList.sort(
+  //   (a, b) => Date.parse(b.release_date) - Date.parse(a.release_date)
+  // );
+
+  // const newPlaylist = await createPlaylist(currUser.id);
+  // addToPlaylist(newPlaylist.id, flatList);
+  // console.log(newPlaylist.id);
+  // console.log(flatList);
 
   useEffect(getSubscriptions, []);
 
@@ -134,14 +132,14 @@ export default function Episodes(props) {
     <div>
       <h1> Latest Podcast Episdoes</h1>
       <h5>{userId}</h5>
-      {subscribedPods.map((pod) => {
+      {/* {subscribedPods.map((pod) => {
         return (
           <div>
             <p>{pod.name}</p>
             <img src={pod.images[2].url} />
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }
