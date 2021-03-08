@@ -99,7 +99,6 @@ export default function LoggedIn({ token }) {
       episodesAdded.push(currEp);
     }
     episodesAdded = episodesAdded.join("%2C");
-    console.log("new podcasts", episodesAdded);
 
     await axios.post(
       `https://api.spotify.com/v1/playlists/${playlist_id}/tracks?uris=${episodesAdded}`,
@@ -147,18 +146,11 @@ export default function LoggedIn({ token }) {
   console.log(subscribedPods);
   console.log("Selected", selectShows);
   return (
-    <div>
+    <div class="min-h-screen  bg-gradient-to-b from-purple-900 via-gray-500 to-green-400 ... ">
       <SpotifyApiContext.Provider value={token}>
-        <button
-          class="bg-gradient-to-r from-green-400 to-green-500 ... hover:bg-green-100 text-white font-bold py-2 px-4 rounded-full"
-          onClick={createUpdated}
-        >
-          Create Playlists
-        </button>
-        {/* <EpisodeModal show={showModal} handleClose={closeModal}>
-          <h1>MODAL</h1>
-        </EpisodeModal> */}
-        <h1>Any shows you want to exlude from your most recent?</h1>
+        <h1 class="p-20 text-white text-7xl font-bold flex justify-center ... ">
+          Any shows you want to exlude?
+        </h1>
         <div class="flex flex-wrap">
           {subscribedPods.map((show) => {
             return (
@@ -172,11 +164,14 @@ export default function LoggedIn({ token }) {
             );
           })}
         </div>
-        <Episodes
-          subscribedPods={subscribedPods}
-          setSubscribedPods={setSubscribedPods}
-          token={token}
-        />
+        <div class="p-20 flex justify-center">
+          <button
+            class="bg-gradient-to-r from-green-400 to-green-500 ... hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full "
+            onClick={createUpdated}
+          >
+            Create Playlist
+          </button>
+        </div>
       </SpotifyApiContext.Provider>
     </div>
   );
