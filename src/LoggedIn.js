@@ -10,7 +10,7 @@ const axios = require("axios");
 
 export default function LoggedIn({ token }) {
   const [subscribedPods, setSubscribedPods] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [selectShows, setSelectShows] = useState([]);
   const [userId, setUserId] = useState("");
 
@@ -61,8 +61,8 @@ export default function LoggedIn({ token }) {
     today = mm + "/" + dd + "/" + yyyy;
 
     const metaData = {
-      name: `Podcasts for ${today}`,
-      description: "Latest Podcasts",
+      name: `Pods for ${today}`,
+      description: "Latest podcasts from your subscriptions",
       public: false,
     };
 
@@ -76,10 +76,73 @@ export default function LoggedIn({ token }) {
     return newPlaylist.data;
   };
 
+  const grabLatest = async (pod) => {
+    const { id } = pod;
+    const episodes = [];
+    const res = await axios.get(
+      `https://api.spotify.com/v1/shows/${id}/episodes?limit=5`,
+      axiosHeader
+    );
+    console.log(res);
+    return res.data.items;
+  };
+
+  const addToPlaylist = async (playlist_id, episodes) => {
+    const convertURI = (uri) => {
+      return uri.split(":").join("%3A");
+    };
+
+    let episodesAdded = [];
+    for (let i = 0; i < 50; i++) {
+      const currEp = convertURI(episodes[i].uri);
+
+      episodesAdded.push(currEp);
+    }
+    episodesAdded = episodesAdded.join("%2C");
+    console.log("new podcasts", episodesAdded);
+
+    await axios.post(
+      `https://api.spotify.com/v1/playlists/${playlist_id}/tracks?uris=${episodesAdded}`,
+      {},
+      axiosHeader
+    );
+
+    console.log("added new episodes to playlist");
+  };
+
+  const createUpdated = async () => {
+    const keptPods = subscribedPods.filter((show) => {
+      return !selectShows.includes(show.id);
+    });
+
+    let allEpisodes = [];
+
+    keptPods.map((show) => {
+      allEpisodes.push(grabLatest(show));
+    });
+
+    allEpisodes = await Promise.all(allEpisodes);
+
+    let flatList = [];
+    allEpisodes.forEach((list) => {
+      list.forEach((episode) => {
+        flatList.push(episode);
+      });
+    });
+    flatList.sort(
+      (a, b) => Date.parse(b.release_date) - Date.parse(a.release_date)
+    );
+
+    const newPlaylist = await createPlaylist(userId);
+    addToPlaylist(newPlaylist.id, flatList);
+    // console.log(flatList);
+    // console.log(keptPods.length, keptPods);
+  };
+
   useEffect(getSubscriptions, []);
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  // const openModal = () => setShowModal(true);
+  // const closeModal = () => setShowModal(false);
 
   console.log(subscribedPods);
   console.log("Selected", selectShows);
@@ -88,7 +151,7 @@ export default function LoggedIn({ token }) {
       <SpotifyApiContext.Provider value={token}>
         <button
           class="bg-gradient-to-r from-green-400 to-green-500 ... hover:bg-green-100 text-white font-bold py-2 px-4 rounded-full"
-          onClick={(userid) => createPlaylist(userId)}
+          onClick={createUpdated}
         >
           Create Playlists
         </button>
