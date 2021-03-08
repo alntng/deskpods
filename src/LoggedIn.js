@@ -52,14 +52,28 @@ export default function LoggedIn({ token }) {
     setSubscribedPods(subscriptions);
   };
 
+  const createPlaylist = async (user_id) => {
+    const metaData = {
+      name: "New Pods",
+      description: "Latest Podcasts",
+      public: false,
+    };
+
+    const newPlaylist = await axios.post(
+      `https://api.spotify.com/v1/users/${user_id}/playlists`,
+      metaData,
+      axiosHeader
+    );
+
+    console.log(newPlaylist);
+    return newPlaylist.data;
+  };
+
   useEffect(getSubscriptions, []);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
-  const createPlaylist = () => {
-    console.log(subscribedPods);
-  };
   console.log(subscribedPods);
   console.log("Selected", selectShows);
   return (
@@ -67,13 +81,13 @@ export default function LoggedIn({ token }) {
       <SpotifyApiContext.Provider value={token}>
         <button
           class="bg-gradient-to-r from-green-400 to-green-500 ... hover:bg-green-100 text-white font-bold py-2 px-4 rounded-full"
-          onClick={(e) => openModal(e)}
+          onClick={(userid) => createPlaylist(userId)}
         >
           Create Playlists
         </button>
-        <EpisodeModal show={showModal} handleClose={closeModal}>
+        {/* <EpisodeModal show={showModal} handleClose={closeModal}>
           <h1>MODAL</h1>
-        </EpisodeModal>
+        </EpisodeModal> */}
         <h1>Any shows you want to exlude from your most recent?</h1>
         <div class="flex flex-wrap">
           {subscribedPods.map((show) => {
