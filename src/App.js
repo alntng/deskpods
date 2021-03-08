@@ -4,38 +4,23 @@ import "react-spotify-auth/dist/index.css";
 import SpotifyPlayer from "react-spotify-web-playback";
 import Cookies from "js-cookie";
 
-import Episodes from "./Episodes";
+import Episodes from "./components/Episodes";
+import LandingPage from "./LandingPage";
+import LoggedIn from "./LoggedIn";
 
 function App() {
   const token = Cookies.get("spotifyAuthToken");
 
   return (
-    <div className="app">
+    <div
+      className="app"
+      class="--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));"
+    >
       {token ? (
-        <SpotifyApiContext.Provider value={token}>
-          <SpotifyPlayer
-            token={token}
-            uris={["spotify:artist:7A0awCXkE1FtSU8B0qwOJQ"]}
-          />
-
-          <Episodes token={token} />
-        </SpotifyApiContext.Provider>
+        <LoggedIn token={token} />
       ) : (
         // Display the login page
-        <SpotifyAuth
-          redirectUri="http://localhost:3000/callback/"
-          clientID="1d54f201e7a04ba689f81a469340ea22"
-          scopes={[
-            Scopes.streaming,
-            Scopes.userReadEmail,
-            Scopes.userReadPrivate,
-            Scopes.userLibraryRead,
-            Scopes.userLibraryModify,
-            Scopes.userModifyPlaybackState,
-            Scopes.userFollowModify,
-            Scopes.userReadPlaybackState,
-          ]}
-        />
+        <LandingPage />
       )}
     </div>
   );
