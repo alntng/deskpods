@@ -4,7 +4,6 @@ import "react-spotify-auth/dist/index.css";
 import SpotifyPlayer from "react-spotify-web-playback";
 import Cookies from "js-cookie";
 
-import Episodes from "./components/Episodes";
 import LandingPage from "./LandingPage";
 import LoggedIn from "./LoggedIn";
 

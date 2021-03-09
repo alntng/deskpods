@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SpotifyPlayer from "react-spotify-web-playback";
 import { SpotifyApiContext } from "react-spotify-api";
-
-import Episodes from "./components/Episodes";
-import EpisodeModal from "./components/EpisodeModal";
 import ShowCard from "./components/ShowCard";
 
 const axios = require("axios");
@@ -166,10 +162,10 @@ export default function LoggedIn({ token }) {
         </div>
         <div class="p-20 flex justify-center">
           <button
-            class="bg-gradient-to-r from-green-400 to-green-500 ... hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full "
+            class="animate-bounce h-25 px-15 m-2 bg-gradient-to-r from-green-400 to-green-500 ... hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full "
             onClick={createUpdated}
           >
-            Create Playlist
+            + Create Playlist
           </button>
         </div>
       </SpotifyApiContext.Provider>
