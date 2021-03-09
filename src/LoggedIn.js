@@ -4,11 +4,13 @@ import ShowCard from "./components/ShowCard";
 
 const axios = require("axios");
 
-export default function LoggedIn({ token }) {
+export default function LoggedIn({ history, token }) {
   const [subscribedPods, setSubscribedPods] = useState([]);
   // const [showModal, setShowModal] = useState(false);
   const [selectShows, setSelectShows] = useState([]);
   const [userId, setUserId] = useState("");
+
+  console.log("browser history", history);
 
   const axiosHeader = {
     headers: {
@@ -130,6 +132,8 @@ export default function LoggedIn({ token }) {
 
     const newPlaylist = await createPlaylist(userId);
     addToPlaylist(newPlaylist.id, flatList);
+
+    history.push("/success");
     // console.log(flatList);
     // console.log(keptPods.length, keptPods);
   };
