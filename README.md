@@ -10,6 +10,7 @@ I subscribe to a lot of podcasts and Spotify is my podcast feed of choice. One n
 Nice ordered view of all your latest pods that have released recently
 
 **Desktop:**
+
 ![Desktop Screenshot](https://i.gyazo.com/28628a84bdce1c3bcfb576cbcd50a658.png)
 
 I can only view by show..... c'mon Spotify
