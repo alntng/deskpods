@@ -8,14 +8,17 @@ export default function Success() {
       <h1 class="p-20 text-white text-7xl font-bold flex justify-center text-center ... ">
         Go ahead and check your spotify playlists!
       </h1>
-      <div class="">
-        <div class="relative flex justify-center">
-          <img
-            class="absolute top-9 left-0  rounded-lg shadow-2xl  object-none object-center"
-            src={screenshot}
-          />
-          <img class="max-w-1/2  absolute top-0 left-0" src={redCircle} />
-        </div>
+
+      <div class="flex justify-center relative">
+        <img
+          class="absolute top-5  rounded-lg shadow-2xl flex justify-center"
+          src={screenshot}
+        />
+        <img
+          class="absolute  flex justify-center max-w-1/2
+          "
+          src={redCircle}
+        />
       </div>
     </div>
   );

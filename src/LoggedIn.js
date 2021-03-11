@@ -146,8 +146,8 @@ export default function LoggedIn({ history, token }) {
   // const openModal = () => setShowModal(true);
   // const closeModal = () => setShowModal(false);
 
-  console.log(subscribedPods);
-  console.log("Selected", selectShows);
+  // console.log(subscribedPods);
+  // console.log("Selected", selectShows);
   return (
     <div class="min-h-screen  bg-gradient-to-b from-purple-900 via-gray-500 to-green-400 ... ">
       <Switch>
