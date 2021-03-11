@@ -18,7 +18,7 @@ Nice ordered view of all your latest pods that have released recently
 <img src='https://i.gyazo.com/28628a84bdce1c3bcfb576cbcd50a658.png' width='300'>
 </p>
 
-I can only view by show..... c'mon Spotify
+I can only view by show..... **_c'mon Spotify_**
 
 ## What Deskpods does
 
@@ -29,5 +29,3 @@ Initially I wanted the user to be able to play podcasts directly in the browser,
 ## Work in Progress
 
 Like all projects, Deskpods is not complete, however for now it has the functionality I intended it to have and am continuously working on it. If you have any suggestions or issues, feel free to [reach out!](mailto:atang8013@gmail.com?subject=Some%20thoughts%20on%20Deskpods)
-
-TEST
