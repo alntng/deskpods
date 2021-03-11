@@ -19,7 +19,7 @@ export default function LandingPage() {
           class="min-h-200 py-50"
           redirectUri="http://localhost:3000/callback/"
           localStorage="false"
-          clientID="1d54f201e7a04ba689f81a469340ea22"
+          clientID={spotifyClientID}
           title="Login with Spotify"
           scopes={[
             Scopes.playlistModifyPublic,
