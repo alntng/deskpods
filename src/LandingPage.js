@@ -1,6 +1,8 @@
 import React from "react";
 import { SpotifyAuth, Scopes } from "react-spotify-auth";
 
+const spotifyClientID = process.env.REACT_APP_CLIENTID;
+
 export default function LandingPage() {
   return (
     <div class="min-h-screen  bg-gradient-to-b from-purple-900 via-gray-500 to-green-400 ... ">
@@ -14,8 +16,9 @@ export default function LandingPage() {
       <br></br>
       <div class="flex justify-center ... ">
         <SpotifyAuth
-          class="min-h-500..."
+          class="min-h-200 py-50"
           redirectUri="http://localhost:3000/callback/"
+          localStorage="false"
           clientID="1d54f201e7a04ba689f81a469340ea22"
           title="Login with Spotify"
           scopes={[
