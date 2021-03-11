@@ -5,11 +5,19 @@ I subscribe to a lot of podcasts and Spotify is my podcast feed of choice. One n
 ## Viewing Pods on each device
 
 **Mobile:**
-![Viewing Podcasts on your iPhone](https://scontent.xx.fbcdn.net/v/t1.15752-9/159503517_519019022645764_4612727917625375307_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=58c789&_nc_ohc=MDp-GxjNiFgAX9Xj-VB&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=57c7126c5f7cdb07d0102574a7bb7b8d&oe=606FC926)
+
+<p style="text-align:center;">
+<img src='https://scontent.xx.fbcdn.net/v/t1.15752-9/159503517_519019022645764_4612727917625375307_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=58c789&_nc_ohc=MDp-GxjNiFgAX9Xj-VB&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=57c7126c5f7cdb07d0102574a7bb7b8d&oe=606FC926' width='300'>
+</p>
+
 Nice ordered view of all your latest pods that have released recently
 
 **Desktop:**
-![Desktop Screenshot](https://i.gyazo.com/28628a84bdce1c3bcfb576cbcd50a658.png)
+
+<p style="text-align:center;">
+<img src='https://i.gyazo.com/28628a84bdce1c3bcfb576cbcd50a658.png' width='300'>
+</p>
+
 I can only view by show..... c'mon Spotify
 
 ## What Deskpods does
