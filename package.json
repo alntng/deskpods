@@ -11,7 +11,9 @@
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
     "js-cookie": "^2.2.1",
+    "path": "^0.12.7",
     "querystring": "^0.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -28,7 +30,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "node server.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
