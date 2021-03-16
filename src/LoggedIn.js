@@ -9,7 +9,6 @@ const axios = require("axios");
 
 export default function LoggedIn({ history, token }) {
   const [subscribedPods, setSubscribedPods] = useState([]);
-  // const [showModal, setShowModal] = useState(false);
   const [selectShows, setSelectShows] = useState([]);
   const [userId, setUserId] = useState("");
 
@@ -84,7 +83,6 @@ export default function LoggedIn({ history, token }) {
       `https://api.spotify.com/v1/shows/${id}/episodes?limit=5`,
       axiosHeader
     );
-    console.log(res);
     return res.data.items;
   };
 
@@ -106,8 +104,6 @@ export default function LoggedIn({ history, token }) {
       {},
       axiosHeader
     );
-
-    console.log("added new episodes to playlist");
   };
 
   const createUpdated = async () => {
@@ -137,17 +133,10 @@ export default function LoggedIn({ history, token }) {
     addToPlaylist(newPlaylist.id, flatList);
 
     history.push("/success");
-    // console.log(flatList);
-    // console.log(keptPods.length, keptPods);
   };
 
   useEffect(getSubscriptions, []);
 
-  // const openModal = () => setShowModal(true);
-  // const closeModal = () => setShowModal(false);
-
-  // console.log(subscribedPods);
-  // console.log("Selected", selectShows);
   return (
     <div class="min-h-screen  bg-gradient-to-b from-purple-900 via-gray-500 to-green-400 ... ">
       <Switch>
