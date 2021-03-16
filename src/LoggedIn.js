@@ -12,8 +12,6 @@ export default function LoggedIn({ history, token }) {
   const [selectShows, setSelectShows] = useState([]);
   const [userId, setUserId] = useState("");
 
-  console.log("browser history", history);
-
   const axiosHeader = {
     headers: {
       Accept: "application/json",
@@ -46,7 +44,6 @@ export default function LoggedIn({ history, token }) {
       subscriptions.push(pod.show);
     });
 
-    console.log("users subscriptions", subscriptions);
     const currUser = await grabUser();
     setUserId(currUser.id);
     setSubscribedPods(subscriptions);
@@ -72,7 +69,6 @@ export default function LoggedIn({ history, token }) {
       axiosHeader
     );
 
-    console.log(newPlaylist);
     return newPlaylist.data;
   };
 
