@@ -17,7 +17,7 @@ export default function LandingPage() {
       <div class="flex justify-center ... ">
         <SpotifyAuth
           class="min-h-200 py-50"
-          redirectUri="https://deskpods.herokuapp.com/callback/"
+          redirectUri="http://localhost:3000/callback/"
           localStorage="false"
           clientID={spotifyClientID}
           title="Login with Spotify"

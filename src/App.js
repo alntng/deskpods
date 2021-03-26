@@ -4,6 +4,7 @@ import "react-spotify-auth/dist/index.css";
 import SpotifyPlayer from "react-spotify-web-playback";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
+// import Routes from "./routes";
 
 import LandingPage from "./LandingPage";
 import LoggedIn from "./LoggedIn";
@@ -11,7 +12,8 @@ import LoggedIn from "./LoggedIn";
 function App() {
   const history = useHistory();
   const token = Cookies.get("spotifyAuthToken");
-  console.log("app history", history);
+  console.log("Is there a token???", token);
+  // console.log("app history", history);
 
   return (
     <div
