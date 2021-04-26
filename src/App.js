@@ -21,7 +21,9 @@ function App() {
       class="--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));"
     >
       {token ? (
-        <LoggedIn history={history} token={token} />
+        <SpotifyApiContext.Provider value={token}>
+          <LoggedIn history={history} token={token} />
+        </SpotifyApiContext.Provider>
       ) : (
         // Display the login page
         <LandingPage />
